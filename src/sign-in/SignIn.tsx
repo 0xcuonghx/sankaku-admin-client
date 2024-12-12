@@ -7,6 +7,8 @@ import MuiCard from "@mui/material/Card";
 import { styled } from "@mui/material/styles";
 import AppTheme from "../shared-theme/AppTheme";
 import ColorModeSelect from "../shared-theme/ColorModeSelect";
+import { useAccount, useConnect } from "wagmi";
+import { Navigate } from "react-router";
 
 const Card = styled(MuiCard)(({ theme }) => ({
   display: "flex",
@@ -51,6 +53,13 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
 }));
 
 export default function SignIn(props: { disableCustomTheme?: boolean }) {
+  const { connectors } = useConnect();
+  const { isConnected } = useAccount();
+
+  if (isConnected) {
+    return <Navigate to="/" replace />;
+  }
+
   return (
     <AppTheme {...props}>
       <CssBaseline enableColorScheme />
@@ -67,11 +76,18 @@ export default function SignIn(props: { disableCustomTheme?: boolean }) {
             Sign in
           </Typography>
 
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-            <Button fullWidth variant="outlined">
-              Sign in with Metamask
-            </Button>
-          </Box>
+          {connectors.map((connector) => (
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              <Button
+                fullWidth
+                variant="outlined"
+                startIcon={<img src={connector.icon} />}
+                onClick={() => connector.connect()}
+              >
+                Sign in with {connector.name}
+              </Button>
+            </Box>
+          ))}
         </Card>
       </SignInContainer>
     </AppTheme>
