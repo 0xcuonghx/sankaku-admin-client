@@ -8,22 +8,36 @@ import Stack from "@mui/material/Stack";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PersonIcon from "@mui/icons-material/Person";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
+import { useNavigate } from "react-router";
 
 const mainListItems = [
-  { text: "Home", icon: <HomeRoundedIcon /> },
-  { text: "Smart Accounts", icon: <PersonIcon /> },
-  { text: "Subscriptions", icon: <SubscriptionsIcon /> },
+  { text: "Home", icon: <HomeRoundedIcon />, path: "/" },
+  { text: "Smart Accounts", icon: <PersonIcon />, path: "/smart-accounts" },
+  {
+    text: "Subscriptions",
+    icon: <SubscriptionsIcon />,
+    path: "/subscriptions",
+  },
 ];
 
 export default function MenuContent() {
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const navigate = useNavigate();
+
   return (
     <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
       <List dense>
         {mainListItems.map((item, index) => (
           <ListItem key={index} disablePadding sx={{ display: "block" }}>
-            <ListItemButton selected={index === 0}>
+            <ListItemButton selected={selectedIndex === index}>
               <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.text} />
+              <ListItemText
+                onClick={() => {
+                  setSelectedIndex(index);
+                  navigate(item.path);
+                }}
+                primary={item.text}
+              />
             </ListItemButton>
           </ListItem>
         ))}

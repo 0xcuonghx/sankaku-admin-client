@@ -18,6 +18,7 @@ import {
   datePickersCustomizations,
   treeViewCustomizations,
 } from "./theme/customizations";
+import { Outlet } from "react-router";
 
 const xThemeComponents = {
   ...chartsCustomizations,
@@ -54,7 +55,8 @@ export default function Dashboard(props: { disableCustomTheme?: boolean }) {
             }}
           >
             <Header />
-            <MainGrid />
+            {/* <MainGrid /> */}
+            <Outlet />
           </Stack>
         </Box>
       </Box>
