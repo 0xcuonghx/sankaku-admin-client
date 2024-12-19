@@ -2,7 +2,7 @@ import { DataGrid, DataGridProps } from "@mui/x-data-grid";
 import useSmartAccounts from "./hooks/useSmartAccounts";
 import { useCallback, useState } from "react";
 
-export default function SmartAccount() {
+export default function SmartAccounts() {
   const [paginationModel, setPaginationModel] = useState({
     pageSize: 10,
     page: 0,

@@ -1,3 +1,5 @@
+import CustomizedDataGrid from "../components/CustomizedDataGrid";
+
 export default function Home() {
-  return <div></div>;
+  return <CustomizedDataGrid />;
 }
