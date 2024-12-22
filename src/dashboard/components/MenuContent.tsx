@@ -8,6 +8,7 @@ import Stack from "@mui/material/Stack";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PersonIcon from "@mui/icons-material/Person";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
+import HistoryIcon from "@mui/icons-material/History";
 import { useNavigate } from "react-router";
 import { Settings } from "@mui/icons-material";
 
@@ -18,6 +19,11 @@ const mainListItems = [
     text: "Subscriptions",
     icon: <SubscriptionsIcon />,
     path: "/subscriptions",
+  },
+  {
+    text: "Activity Logs",
+    icon: <HistoryIcon />,
+    path: "/activity-logs",
   },
   {
     text: "Contract Management",

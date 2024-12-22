@@ -26,6 +26,8 @@ export default function NavbarBreadcrumbs() {
       ? "Smart Accounts"
       : location.pathname === "/subscriptions"
       ? "Subscriptions"
+      : location.pathname === "/activity-logs"
+      ? "Activity Logs"
       : "Contract Management";
 
   return (
