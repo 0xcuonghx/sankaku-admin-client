@@ -1,7 +1,8 @@
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { useRecurringExecutionPlans } from "./hooks/useRecurringExecutionPlans";
-import { Chip } from "@mui/material";
+import { Box, Button, Chip, Switch, Typography } from "@mui/material";
 import { formatUnits } from "viem";
+import { AddOutlined } from "@mui/icons-material";
 
 export default function ContractManagement() {
   const { data, isLoading } = useRecurringExecutionPlans();
@@ -68,60 +69,70 @@ export default function ContractManagement() {
       field: "active",
       headerName: "Active",
       flex: 0.5,
-      renderCell: (params) => (
-        <Chip
-          label={params.value.toString()}
-          color={params.value ? "primary" : "secondary"}
-          size="small"
-        />
-      ),
+      renderCell: (params) => <Switch checked={params.value} />,
     },
   ];
 
   return (
-    <DataGrid
-      sx={{ width: "100%" }}
-      loading={isLoading}
-      autoHeight
-      checkboxSelection
-      rows={data}
-      columns={columns}
-      getRowClassName={(params) =>
-        params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
-      }
-      initialState={{
-        pagination: { paginationModel: { pageSize: 20 } },
-      }}
-      pageSizeOptions={[10, 20, 50]}
-      disableColumnResize
-      getRowId={(row) => row.planId}
-      density="compact"
-      slotProps={{
-        filterPanel: {
-          filterFormProps: {
-            logicOperatorInputProps: {
-              variant: "outlined",
-              size: "small",
-            },
-            columnInputProps: {
-              variant: "outlined",
-              size: "small",
-              sx: { mt: "auto" },
-            },
-            operatorInputProps: {
-              variant: "outlined",
-              size: "small",
-              sx: { mt: "auto" },
-            },
-            valueInputProps: {
-              InputComponentProps: {
+    <Box sx={{ width: "100%", maxWidth: { sm: "100%", md: "1700px" } }}>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          marginBottom: 10,
+        }}
+      >
+        <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
+          Subscription Plans
+        </Typography>
+        <Button startIcon={<AddOutlined />} variant="contained">
+          Add
+        </Button>
+      </div>
+      <DataGrid
+        sx={{ width: "100%" }}
+        loading={isLoading}
+        autoHeight
+        disableRowSelectionOnClick
+        rows={data}
+        columns={columns}
+        getRowClassName={(params) =>
+          params.indexRelativeToCurrentPage % 2 === 0 ? "even" : "odd"
+        }
+        initialState={{
+          pagination: { paginationModel: { pageSize: 20 } },
+        }}
+        pageSizeOptions={[10, 20, 50]}
+        disableColumnResize
+        getRowId={(row) => row.planId}
+        density="compact"
+        slotProps={{
+          filterPanel: {
+            filterFormProps: {
+              logicOperatorInputProps: {
                 variant: "outlined",
                 size: "small",
               },
+              columnInputProps: {
+                variant: "outlined",
+                size: "small",
+                sx: { mt: "auto" },
+              },
+              operatorInputProps: {
+                variant: "outlined",
+                size: "small",
+                sx: { mt: "auto" },
+              },
+              valueInputProps: {
+                InputComponentProps: {
+                  variant: "outlined",
+                  size: "small",
+                },
+              },
             },
           },
-        },
-      }}
-    />
+        }}
+      />
+    </Box>
   );
 }
