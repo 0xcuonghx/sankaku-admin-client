@@ -8,6 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import SmartAccount from "./dashboard/smart-accounts/SmartAccount";
 import Subscriptions from "./dashboard/subscriptions/Subscriptions";
 import Home from "./dashboard/home/Home";
+import ContractManagement from "./dashboard/contract-management/ContractManagement";
 
 export const config = createConfig({
   chains: [polygonAmoy],
@@ -36,6 +37,10 @@ export default function App() {
               <Route index element={<Home />} />
               <Route path="smart-accounts" element={<SmartAccount />} />
               <Route path="subscriptions" element={<Subscriptions />} />
+              <Route
+                path="contract-management"
+                element={<ContractManagement />}
+              />
             </Route>
           </Routes>
         </QueryClientProvider>

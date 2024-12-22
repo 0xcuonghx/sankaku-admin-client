@@ -24,7 +24,9 @@ export default function NavbarBreadcrumbs() {
       ? "Home"
       : location.pathname === "/smart-accounts"
       ? "Smart Accounts"
-      : "Subscriptions";
+      : location.pathname === "/subscriptions"
+      ? "Subscriptions"
+      : "Contract Management";
 
   return (
     <StyledBreadcrumbs

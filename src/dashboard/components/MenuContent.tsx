@@ -9,6 +9,7 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PersonIcon from "@mui/icons-material/Person";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import { useNavigate } from "react-router";
+import { Settings } from "@mui/icons-material";
 
 const mainListItems = [
   { text: "Home", icon: <HomeRoundedIcon />, path: "/" },
@@ -18,6 +19,11 @@ const mainListItems = [
     icon: <SubscriptionsIcon />,
     path: "/subscriptions",
   },
+  {
+    text: "Contract Management",
+    icon: <Settings />,
+    path: "/contract-management",
+  },
 ];
 
 export default function MenuContent() {
@@ -25,7 +31,7 @@ export default function MenuContent() {
   const navigate = useNavigate();
 
   return (
-    <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
+    <Stack sx={{ flexGrow: 1, p: 1 }}>
       <List dense>
         {mainListItems.map((item, index) => (
           <ListItem key={index} disablePadding sx={{ display: "block" }}>
