@@ -10,11 +10,23 @@ import {
   Typography,
 } from "@mui/material";
 import { formatUnits } from "viem";
-import { AddOutlined, PauseCircleOutline } from "@mui/icons-material";
+import {
+  AddOutlined,
+  PlayCircleOutline,
+  StopOutlined,
+} from "@mui/icons-material";
 import { RECURRING_EXECUTOR_CONTRACT_ADDRESS } from "../../utils/constants";
+import PauseConfirmDialog from "./components/PauseConfirmDialog";
+import { useState } from "react";
+import useIsPaused from "./hooks/useIsPaused";
+import UnpauseConfirmDialog from "./components/UnpauseConfirmDialog";
 
 export default function ContractManagement() {
   const { data, isLoading } = useRecurringExecutionPlans();
+  const { data: isPaused, error } = useIsPaused();
+
+  const [openPause, setOpenPause] = useState(false);
+  const [openUnpause, setOpenUnpause] = useState(false);
 
   const columns: GridColDef[] = [
     { field: "planId", headerName: "Id" },
@@ -95,9 +107,23 @@ export default function ContractManagement() {
           <Typography component="h2" variant="h6" sx={{ mb: 2 }}>
             Information
           </Typography>
-          <Button startIcon={<PauseCircleOutline />} variant="contained">
-            Pause
-          </Button>
+          {isPaused ? (
+            <Button
+              startIcon={<PlayCircleOutline />}
+              variant="contained"
+              onClick={() => setOpenUnpause(true)}
+            >
+              Unpause
+            </Button>
+          ) : (
+            <Button
+              startIcon={<StopOutlined />}
+              variant="contained"
+              onClick={() => setOpenPause(true)}
+            >
+              Pause
+            </Button>
+          )}
         </div>
         <div>
           <Typography component="p">
@@ -112,8 +138,8 @@ export default function ContractManagement() {
           <Typography>
             Status:{" "}
             <Chip
-              label={true ? "Active" : "Inactive"}
-              color={true ? "success" : "error"}
+              label={!isPaused ? "Active" : "Paused"}
+              color={!isPaused ? "success" : "error"}
               size="small"
             />
           </Typography>
@@ -179,6 +205,14 @@ export default function ContractManagement() {
           }}
         />
       </Paper>
+      <PauseConfirmDialog
+        open={openPause}
+        onClose={() => setOpenPause(false)}
+      />
+      <UnpauseConfirmDialog
+        open={openUnpause}
+        onClose={() => setOpenUnpause(false)}
+      />
     </Box>
   );
 }

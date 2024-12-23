@@ -13,7 +13,6 @@ import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useNavigate } from "react-router";
 import { QueueOutlined, Settings } from "@mui/icons-material";
 import { INDEXER_BASE_URL } from "../../utils/constants";
-import { Link } from "@mui/material";
 
 const mainListItems = [
   { text: "Home", icon: <HomeRoundedIcon />, path: "/" },
