@@ -1,5 +1,6 @@
 import { useReadContracts } from "wagmi";
 import { parseAbi } from "viem";
+import { RECURRING_EXECUTOR_CONTRACT_ADDRESS } from "../../../utils/constants";
 
 export const useRecurringExecutionPlans = () => {
   const contracts = Array.from({ length: 6 }).map((_, i) => ({
@@ -7,7 +8,7 @@ export const useRecurringExecutionPlans = () => {
       "function recurringExecutionPlanOf(uint256 planId) public view returns (uint8, address, address, uint256, bool)",
     ]),
     functionName: "recurringExecutionPlanOf",
-    address: "0x9c8a9F28005b5b0ECA5cafb4B0d234e71a38293c" as `0x${string}`,
+    address: RECURRING_EXECUTOR_CONTRACT_ADDRESS as `0x${string}`,
     args: [BigInt(i + 1)],
   }));
 

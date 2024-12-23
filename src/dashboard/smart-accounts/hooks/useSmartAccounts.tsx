@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { INDEXER_BASE_URL } from "../../../utils/constants";
 
 interface SmartAccountResponse {
   data: {
@@ -19,9 +20,7 @@ export default function useSmartAccounts({
     queryKey: ["smart-accounts", page, limit],
     queryFn: () =>
       fetch(
-        `http://194.233.67.165:3400/smart-accounts?page=${
-          page + 1
-        }&limit=${limit}`
+        `${INDEXER_BASE_URL}/smart-accounts?page=${page + 1}&limit=${limit}`
       ).then((res) => res.json()),
   });
 }

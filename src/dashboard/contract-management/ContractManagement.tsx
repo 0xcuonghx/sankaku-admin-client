@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import { formatUnits } from "viem";
 import { AddOutlined, PauseCircleOutline } from "@mui/icons-material";
+import { RECURRING_EXECUTOR_CONTRACT_ADDRESS } from "../../utils/constants";
 
 export default function ContractManagement() {
   const { data, isLoading } = useRecurringExecutionPlans();
@@ -102,12 +103,10 @@ export default function ContractManagement() {
           <Typography component="p">
             Contract Address:{" "}
             <Link
-              href={
-                "https://amoy.polygonscan.com/address/0x9c8a9F28005b5b0ECA5cafb4B0d234e71a38293c"
-              }
+              href={`https://amoy.polygonscan.com/address/${RECURRING_EXECUTOR_CONTRACT_ADDRESS}`}
               target="_blank"
             >
-              0x9c8a9F28005b5b0ECA5cafb4B0d234e71a38293c
+              {RECURRING_EXECUTOR_CONTRACT_ADDRESS}
             </Link>
           </Typography>
           <Typography>

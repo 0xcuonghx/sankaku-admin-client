@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { INDEXER_BASE_URL } from "../../../utils/constants";
 
 export interface ActivityLogResponse {
   data: {
@@ -29,9 +30,7 @@ export default function useActivityLogs({
     queryKey: ["activity-logs", page, limit],
     queryFn: () =>
       fetch(
-        `http://194.233.67.165:3400/activity-logs?page=${
-          page + 1
-        }&limit=${limit}`
+        `${INDEXER_BASE_URL}/activity-logs?page=${page + 1}&limit=${limit}`
       ).then((res) => res.json()),
   });
 }

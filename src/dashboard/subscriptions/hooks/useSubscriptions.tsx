@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { INDEXER_BASE_URL } from "../../../utils/constants";
 
 export interface SubscriptionResponse {
   data: {
@@ -26,9 +27,7 @@ export default function useSubscriptions({
     queryKey: ["subscriptions", page, limit],
     queryFn: () =>
       fetch(
-        `http://194.233.67.165:3400/subscriptions?page=${
-          page + 1
-        }&limit=${limit}`
+        `${INDEXER_BASE_URL}/subscriptions?page=${page + 1}&limit=${limit}`
       ).then((res) => res.json()),
   });
 }

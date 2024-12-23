@@ -8,10 +8,11 @@ import {
 } from "@mui/material";
 import { formatEther } from "viem";
 import { useBalance, useReadContract } from "wagmi";
+import { EXECUTOR_ADDRESS } from "../../utils/constants";
 
 export default function Home() {
   const { data: executorBalance } = useBalance({
-    address: "0x924B5E4be3f1D84f4993bAE5ceF3D8Fda1a4634b",
+    address: EXECUTOR_ADDRESS,
   });
 
   return (
