@@ -9,8 +9,11 @@ import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import PersonIcon from "@mui/icons-material/Person";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import HistoryIcon from "@mui/icons-material/History";
+import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import { useNavigate } from "react-router";
-import { Settings } from "@mui/icons-material";
+import { QueueOutlined, Settings } from "@mui/icons-material";
+import { INDEXER_BASE_URL } from "../../utils/constants";
+import { Link } from "@mui/material";
 
 const mainListItems = [
   { text: "Home", icon: <HomeRoundedIcon />, path: "/" },
@@ -37,7 +40,7 @@ export default function MenuContent() {
   const navigate = useNavigate();
 
   return (
-    <Stack sx={{ flexGrow: 1, p: 1 }}>
+    <Stack sx={{ flexGrow: 1, p: 1, justifyContent: "space-between" }}>
       <List dense>
         {mainListItems.map((item, index) => (
           <ListItem key={index} disablePadding sx={{ display: "block" }}>
@@ -53,6 +56,22 @@ export default function MenuContent() {
             </ListItemButton>
           </ListItem>
         ))}
+      </List>
+
+      <List dense>
+        <ListItem disablePadding sx={{ display: "block" }}>
+          <ListItemButton
+            onClick={() => window.open(`${INDEXER_BASE_URL}/queues`, "_blank")}
+          >
+            <ListItemIcon>
+              <QueueOutlined />
+            </ListItemIcon>
+            <ListItemText primary={"Queues"} />
+            <ListItemIcon>
+              <OpenInNewIcon />
+            </ListItemIcon>
+          </ListItemButton>
+        </ListItem>
       </List>
     </Stack>
   );
